@@ -1,0 +1,12 @@
+openai
+langchain
+langchain-core
+langchain-community
+langgraph
+chromadb
+tiktoken
+aiohttp
+python-dotenv
+pydantic
+tenacity
+rich
