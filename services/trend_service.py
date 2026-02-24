@@ -3,37 +3,34 @@ from typing import List, Dict, Any
 
 class TrendService:
     """
-    Abstract trend ingestion layer.
-    Replace stub fetchers with real API integrations later.
+    WIP Trend ingestion layer that simulates real-world research.
     """
 
     def __init__(self, llm_service):
         self.llm = llm_service
 
-    async def fetch_raw_trends(self) -> List[Dict[str, Any]]:
+    async def fetch_raw_trends(self, theme: str = None) -> List[Dict[str, Any]]:
         """
-        Stub: replace with real sources
-        - TikTok Creative Center scraping
-        - YouTube trending API
-        - Twitter/X trends
+        Simulates fetching trending topics.
         """
-
-        # Placeholder
-        return [
-            {"topic": "AI in everyday tools", "engagement": 92},
-            {"topic": "Retro tech nostalgia", "engagement": 88},
-            {"topic": "Behind the scenes builds", "engagement": 95},
+        # Simulation of trending topics
+        topics = [
+            {"topic": "AI-powered storytelling", "relevance": 92},
+            {"topic": "Retro tech nostalgia", "relevance": 88},
+            {"topic": "Minimalist workspace setups", "relevance": 85},
+            {"topic": "Nostalgic tech restorations", "relevance": 95}
         ]
+        return topics
 
-    async def analyze_trends(self, creator_identity_summary: str) -> List[Dict[str, Any]]:
-        raw = await self.fetch_raw_trends()
+    async def analyze_trends(self, creator_identity_summary: str, trend_data: List[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        raw = trend_data or await self.fetch_raw_trends()
         system_prompt = """
         You are a trend analyst.
         Score trends for:
         - Alignment with creator identity
         - Novelty potential
         - Saturation risk
-        Return structured JSON.
+        Return structured JSON list of objects with 'topic', 'score', and 'rationale'.
         """
         user_prompt = f"""
         Creator identity:

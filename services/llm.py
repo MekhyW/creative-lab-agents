@@ -1,4 +1,5 @@
 import json
+import yaml
 from typing import Any, Dict, Optional
 from dataclasses import dataclass
 from openai import AsyncOpenAI
@@ -16,6 +17,12 @@ class LLMService:
     Centralized LLM router.
     Routes different creative roles to different models + configs.
     """
+
+    @staticmethod
+    def load_config_from_yaml(file_path: str) -> Dict[str, ModelConfig]:
+        with open(file_path, "r") as f:
+            raw_config = yaml.safe_load(f)
+        return { role: ModelConfig(name=cfg["name"], temperature=cfg["temperature"], max_tokens=cfg["max_tokens"]) for role, cfg in raw_config.items() }
 
     def __init__(self, api_key: str, model_map: Dict[str, ModelConfig]):
         self.client = AsyncOpenAI(api_key=api_key)
