@@ -2,6 +2,7 @@ openai
 langchain
 langchain-core
 langchain-community
+langchain-openai
 langgraph
 chromadb
 tiktoken
@@ -11,3 +12,5 @@ pydantic
 tenacity
 rich
 PyYAML
+fastapi
+uvicorn[standard]

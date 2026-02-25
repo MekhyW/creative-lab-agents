@@ -1,7 +1,7 @@
 import asyncio
 import os
 from typing import Dict, Any
-from services.llm import LLMService, ModelConfig
+from services.llm import LLMService
 from services.memory_service import MemoryService
 from services.trend_service import TrendService
 from graph.build_graph import build_graph

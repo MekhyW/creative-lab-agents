@@ -1,3 +1,5 @@
+from graph.state import CreativeState
+
 def human_select_idea_node(state: CreativeState):
     print("\nTop Ideas:\n")
     for i, idea in enumerate(state["ranked_ideas"][:5]):

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Lab Agents — Control Center</title>
+  <meta name="description" content="Dashboard to trigger vault ingest and trend scouting for Creative Lab Agents." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚗️</span>
+        <span class="logo-text">Creative Lab <span class="accent">Agents</span></span>
+      </div>
+      <div class="status-bar" id="statusBar">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-label" id="statusLabel">Connecting…</span>
+        <div class="status-pills" id="statusPills"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main layout ─────────────────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ── PANEL 1: Vault Ingest ──────────────────────────────────────────── -->
+    <section class="panel" id="ingestPanel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span class="panel-icon">📚</span>
+          <h2>Vault Ingest</h2>
+        </div>
+        <span class="panel-badge" id="ingestBadge">Idle</span>
+      </div>
+      <p class="panel-desc">Index your Obsidian vault into the Chroma vector database for memory retrieval.</p>
+
+      <div class="form-group">
+        <label for="vaultPath">Vault Path</label>
+        <input type="text" id="vaultPath" placeholder="./my_vault" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="chromaPath">Chroma DB Path</label>
+        <input type="text" id="chromaPath" placeholder="./chroma_db" autocomplete="off" />
+      </div>
+
+      <button class="btn btn-primary" id="ingestBtn" onclick="triggerIngest()">
+        <span class="btn-icon">🚀</span> Ingest Vault
+      </button>
+
+      <div class="log-box" id="ingestLog" aria-live="polite">
+        <div class="log-placeholder">Logs will appear here…</div>
+      </div>
+    </section>
+
+    <!-- ── PANEL 2: Trend Scout ───────────────────────────────────────────── -->
+    <section class="panel" id="scoutPanel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span class="panel-icon">📡</span>
+          <h2>Trend Scout</h2>
+        </div>
+        <span class="panel-badge" id="scoutBadge">Idle</span>
+      </div>
+      <p class="panel-desc">Fetch and analyze trending signals, matched against your creator identity.</p>
+
+      <div class="form-group">
+        <label for="scoutTheme">Topic / Theme <span class="optional">(optional)</span></label>
+        <input type="text" id="scoutTheme" placeholder="e.g. AI video editing" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="scoutConstraints">Constraints <span class="optional">(comma-separated)</span></label>
+        <input type="text" id="scoutConstraints" placeholder="e.g. under 60s, no voiceover" autocomplete="off" />
+      </div>
+
+      <button class="btn btn-primary" id="scoutBtn" onclick="triggerScout()">
+        <span class="btn-icon">🔍</span> Scout Trends
+      </button>
+
+      <!-- Trend cards grid -->
+      <div class="trends-grid" id="trendsGrid"></div>
+    </section>
+
+    <!-- ── PANEL 3: Activity Feed ─────────────────────────────────────────── -->
+    <section class="panel panel-feed" id="feedPanel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span class="panel-icon">⚡</span>
+          <h2>Activity Feed</h2>
+        </div>
+        <button class="btn-ghost" onclick="clearFeed()">Clear</button>
+      </div>
+      <div class="feed-list" id="feedList" aria-live="polite">
+        <div class="log-placeholder">No activity yet…</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
