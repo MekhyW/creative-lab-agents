@@ -14,6 +14,7 @@ load_dotenv()
 # -----------------------------
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
 CHROMA_PATH = os.getenv("CHROMA_PATH", "./chroma_db")
 VAULT_PATH = os.getenv("VAULT_PATH", "./my_vault")
 MODELS_CONFIG_PATH = os.path.join("config", "models.yaml")
@@ -80,7 +81,7 @@ def build_initial_state(theme: str, constraints: list, trend_signals: list) -> D
 
 async def run_session():
     model_map = LLMService.load_config_from_yaml(MODELS_CONFIG_PATH)
-    llm_service = LLMService(api_key=OPENAI_API_KEY, model_map=model_map)
+    llm_service = LLMService(api_key=OPENAI_API_KEY, model_map=model_map, google_api_key=GOOGLE_API_KEY)
     memory_service = MemoryService(persist_directory=CHROMA_PATH, embedding_api_key=OPENAI_API_KEY)
     trend_service = TrendService(llm_service)
     app = build_graph(llm_service=llm_service, memory_service=memory_service, trend_service=trend_service)

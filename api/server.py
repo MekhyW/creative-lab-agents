@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
 CHROMA_PATH    = os.getenv("CHROMA_PATH", "./chroma_db")
 VAULT_PATH     = os.getenv("VAULT_PATH", "./my_vault")
 MODELS_CONFIG  = os.path.join("config", "models.yaml")
@@ -35,7 +36,7 @@ def _init_services():
         from services.memory_service import MemoryService
         from services.trend_service import TrendService
         model_map       = LLMService.load_config_from_yaml(MODELS_CONFIG)
-        _llm_service    = LLMService(api_key=OPENAI_API_KEY, model_map=model_map)
+        _llm_service    = LLMService(api_key=OPENAI_API_KEY, model_map=model_map, google_api_key=GOOGLE_API_KEY)
         _memory_service = MemoryService(persist_directory=CHROMA_PATH, embedding_api_key=OPENAI_API_KEY)
         _trend_service  = TrendService(_llm_service)
         _services_ready = True
@@ -69,11 +70,12 @@ class ScoutRequest(BaseModel):
 async def get_status():
     """Return environment/config health info."""
     return {
-        "api_key_present":  bool(OPENAI_API_KEY),
-        "vault_path":        VAULT_PATH,
-        "chroma_path":       CHROMA_PATH,
-        "models_config":     MODELS_CONFIG,
-        "services_ready":    _services_ready,
+        "api_key_present":    bool(OPENAI_API_KEY),
+        "google_key_present": bool(GOOGLE_API_KEY),
+        "vault_path":         VAULT_PATH,
+        "chroma_path":        CHROMA_PATH,
+        "models_config":      MODELS_CONFIG,
+        "services_ready":     _services_ready,
     }
 
 

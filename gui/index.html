@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Creative Lab Agents — Control Center</title>
-  <meta name="description" content="Dashboard to trigger vault ingest and trend scouting for Creative Lab Agents." />
+  <title>Trend Scout Agents — Control Center</title>
+  <meta name="description" content="Dashboard to trigger vault ingest and trend scouting for Trend Scout Agents." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
   <header class="header">
     <div class="header-inner">
       <div class="logo">
-        <span class="logo-icon">⚗️</span>
-        <span class="logo-text">Creative Lab <span class="accent">Agents</span></span>
+        <span class="logo-text">Trend Scout Agents</span>
       </div>
       <div class="status-bar" id="statusBar">
         <span class="status-dot" id="statusDot"></span>
@@ -34,7 +37,7 @@
     <section class="panel" id="ingestPanel">
       <div class="panel-header">
         <div class="panel-title">
-          <span class="panel-icon">📚</span>
+          <span class="panel-icon">📁</span>
           <h2>Vault Ingest</h2>
         </div>
         <span class="panel-badge" id="ingestBadge">Idle</span>
@@ -51,7 +54,7 @@
       </div>
 
       <button class="btn btn-primary" id="ingestBtn" onclick="triggerIngest()">
-        <span class="btn-icon">🚀</span> Ingest Vault
+        Ingest Vault
       </button>
 
       <div class="log-box" id="ingestLog" aria-live="polite">
@@ -80,7 +83,7 @@
       </div>
 
       <button class="btn btn-primary" id="scoutBtn" onclick="triggerScout()">
-        <span class="btn-icon">🔍</span> Scout Trends
+        Scout Trends
       </button>
 
       <!-- Trend cards grid -->
@@ -105,4 +108,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>

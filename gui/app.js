@@ -67,7 +67,10 @@ async function loadStatus() {
         }
         pills.innerHTML = `
       <span class="pill ${data.api_key_present ? 'ok' : 'warn'}">
-        ${data.api_key_present ? '🔑 Key OK' : '⚠ No Key'}
+        ${data.api_key_present ? '🔑 OpenAI OK' : '⚠ No OpenAI Key'}
+      </span>
+      <span class="pill ${data.google_key_present ? 'ok' : 'warn'}">
+        ${data.google_key_present ? '🔑 Gemini OK' : '⚠ No Gemini Key'}
       </span>
       <span class="pill">vault: ${data.vault_path}</span>
       <span class="pill">chroma: ${data.chroma_path}</span>`;
