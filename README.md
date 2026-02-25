@@ -13,20 +13,17 @@ Experimental system that scouts live trends and combines them with your personal
    Create a `.env` file in the root directory:
    ```env
    OPENAI_API_KEY=your_api_key_here
-   ```
-
-3. **Index your Obsidian Vault:**
-   Point the scouter to your markdown notes:
-   ```bash
-   python vault_ingest.py --vault "C:\Path\To\Your\Vault"
+   GOOGLE_API_KEY=your_api_key_here
    ```
 
 ## Usage
 
 Run the main scouter session:
 ```bash
-python main.py
+uvicorn api.server:app --reload --port 8000
 ```
+
+Open http://localhost:8000 in your browser.
 
 ### Flow:
 1. **Trend Analysis:** The system scouts trends aligned with your creator identity.
@@ -38,6 +35,6 @@ python main.py
 ## Configuration
 
 You can customize models and parameters in `config/models.yaml`:
-- **name:** OpenAI model to use (e.g., `gpt-4o`, `gpt-4o-mini`).
+- **name:** Model to use (e.g., `gpt-4o`, `gpt-4o-mini`, `gemini-2.5-pro`, `gemini-2.5-flash`).
 - **temperature:** Creative randomness (0.0 to 1.0).
 - **max_tokens:** Limits for different roles.
